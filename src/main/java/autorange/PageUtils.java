@@ -27,7 +27,31 @@ public class PageUtils extends DriverCore {
         }
 
         try{
-            WebElement element = new WebDriverWait(driver, 5)
+            WebElement element = new WebDriverWait(driver, 30)
+                    .until(ExpectedConditions.visibilityOfElementLocated(elementId));
+            return element;
+        }
+        catch(NoSuchElementException e){
+            return null;
+        }
+    }
+    
+    /**
+     * Find Element
+     *
+     * @param locator
+     * @return
+     */
+    public WebElement getElement(String locator, int customWait){
+        By elementId;
+        if(locator.contains("//")){
+            elementId = By.xpath(locator);
+        } else{
+            elementId = By.cssSelector(locator);
+        }
+
+        try{
+            WebElement element = new WebDriverWait(driver, customWait)
                     .until(ExpectedConditions.visibilityOfElementLocated(elementId));
             return element;
         }
