@@ -1,5 +1,7 @@
 package autorange;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -53,6 +55,29 @@ public class PageUtils extends DriverCore {
         try{
             WebElement element = new WebDriverWait(driver, customWait)
                     .until(ExpectedConditions.visibilityOfElementLocated(elementId));
+            return element;
+        }
+        catch(NoSuchElementException e){
+            return null;
+        }
+    }
+    
+    /**
+     * Find Element
+     *
+     * @param locator
+     * @return
+     */
+    public List<WebElement> getListOfElements(String locator){
+        By elementId;
+        if(locator.contains("//")){
+            elementId = By.xpath(locator);
+        } else{
+            elementId = By.cssSelector(locator);
+        }
+
+        try{
+            List<WebElement> element = driver.findElements(elementId);
             return element;
         }
         catch(NoSuchElementException e){

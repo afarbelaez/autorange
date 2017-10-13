@@ -3,12 +3,9 @@ package autorange;
 import io.appium.java_client.android.AndroidDriver;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
@@ -34,8 +31,8 @@ public class TestUtils extends DriverCore{
                 capabilities.setCapability("platformVersion", env.getVersion());
                 capabilities.setCapability("app", app.getAbsolutePath());
                 capabilities.setCapability("appPackage", env.getAppName());
-                capabilities.setCapability("fullReset", true);
-                capabilities.setCapability("newCommandTimeout", 240);
+                capabilities.setCapability("fullReset", false);
+                capabilities.setCapability("newCommandTimeout", 360);
                 capabilities.setCapability("eventTimings", true);
                 driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
